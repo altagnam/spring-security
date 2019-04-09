@@ -3,7 +3,6 @@ package br.mg.gnam.security.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -30,11 +29,12 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 
-
-	@Bean
-	public BCryptPasswordEncoder bCryptPasswordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
+	/**
+	 * Bean responsável pela criptografia da senha
+	 */
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	
 	
 
 	/**
@@ -55,7 +55,7 @@ public class UserService {
 		}
 		
 		user.setRole(ROLE_USER);
-		user.setPassword(bCryptPasswordEncoder().encode(user.getPassword()));
+		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		return userRepository.save(user);
 	}
 	

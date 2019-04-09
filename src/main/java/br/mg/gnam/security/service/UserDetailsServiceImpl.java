@@ -9,6 +9,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.mg.gnam.security.modal.User;
@@ -30,6 +31,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 	 */
 	@Autowired
 	private UserRepository userRepository;
+	
+	/**
+	 * Bean responsável pela criptografia da senha
+	 */
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 
 	/*
@@ -49,7 +56,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		boolean accountNonLocked = true;
 		return new org.springframework.security.core.userdetails.User
 				(user.getLogin(),
-				user.getPassword(), enabled, accountNonExpired, credentialsNonExpired,
+				bCryptPasswordEncoder.encode(user.getPassword()), enabled, accountNonExpired, credentialsNonExpired,
 				accountNonLocked, getAuthorities(user.getRole()));
 	}
 
