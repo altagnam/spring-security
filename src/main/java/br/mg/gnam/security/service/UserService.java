@@ -1,9 +1,9 @@
 package br.mg.gnam.security.service;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -30,42 +30,12 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 
-	/**
-	 * Bean responsável pela criptografia da senha
-	 */
-	@Autowired
-	private BCryptPasswordEncoder bCryptPasswordEncoder;
-	
-	/**
-	 * Cache com os usuários conectados no websocket
-	 */
-	private HashMap<String, Boolean> usersConnectedChat = new  HashMap<String, Boolean>();
-	
-	
-	/**
-	 * Verifica se um determinado login esta conectado ao chat
-	 * @param login
-	 * @return
-	 */
-	public boolean isUserOnWebSocket(String login) {
-		return usersConnectedChat.containsKey(login);
-	}	
-	
-	/**
-	 * Indica que um determinado login esta conectado ao chat 
-	 * @param login
-	 */
-	public void userOnWebSocket(String login) {
-		usersConnectedChat.put(login, true);
+
+	@Bean
+	public BCryptPasswordEncoder bCryptPasswordEncoder() {
+		return new BCryptPasswordEncoder();
 	}
 	
-	/**
-	 * Indica que um determinado login nao esta conectado ao chat
-	 * @param login
-	 */
-	public void userOffWebSocket(String login) {
-		usersConnectedChat.remove(login);
-	}	
 
 	/**
 	 * Salva um usuário na base de dados
@@ -85,7 +55,7 @@ public class UserService {
 		}
 		
 		user.setRole(ROLE_USER);
-		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+		user.setPassword(bCryptPasswordEncoder().encode(user.getPassword()));
 		return userRepository.save(user);
 	}
 	
