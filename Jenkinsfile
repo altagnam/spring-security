@@ -25,9 +25,8 @@ pipeline {
                 }
             }
         }
-       stage('Deploy approval'){
-    		message "Deploy to prod?"
-    		
+       stage ('Promotion') {
+  			input 'Deploy to Production?'
 		}
         stage('Deliver') { 
             steps {
