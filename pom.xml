@@ -61,15 +61,12 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<mainClass>br.mg.gnam.security.SpringSecurityApplication</mainClass>
+					<archive>
+						<manifest>
+							<mainClass>br.mg.gnam.security.SpringSecurityApplication</mainClass>
+						</manifest>
+					</archive>
 				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<goal>repackage</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 		</plugins>
 	</build>

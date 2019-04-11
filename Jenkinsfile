@@ -12,7 +12,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'mvn clean'
-                sh 'mvn package spring-boot:repackage'
+                sh 'mvn package'
             }
         }
         stage('Test') {
