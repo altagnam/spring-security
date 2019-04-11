@@ -26,7 +26,9 @@ pipeline {
             }
         }
        stage ('Promotion') {
+       	steps {
   			input 'Deploy to Production?'
+  			}
 		}
         stage('Deliver') { 
             steps {
