@@ -25,6 +25,9 @@ pipeline {
                 }
             }
         }
+        stage('Deploy approval'){
+    		input "Deploy to prod?"
+		}
         stage('Deliver') { 
             steps {
                 sh './jenkins/deliver.sh' 
