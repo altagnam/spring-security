@@ -11,7 +11,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'mvn -B -DskipTests clean package'
+                sh 'mvn clean'
+                sh 'mvn package spring-boot:repackage'
             }
         }
         stage('Test') {
