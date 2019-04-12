@@ -34,5 +34,11 @@ pipeline {
                 sh './jenkins/deliver.sh' 
             }
         }
+        stage('Docker') { 
+            steps {
+                sh 'docker build -t rafael.altagnam/spring-security .'
+                sh 'docker run -p 2000:8080 rafael.altagnam/spring-security'
+            }
+        }
     }
 }
