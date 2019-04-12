@@ -19,7 +19,13 @@ set -x
 VERSION=`mvn help:evaluate -Dexpression=project.version | grep "^[^\[]"`
 set +x
 
-echo 'The following command runs and outputs the execution of your Java application (which Jenkins built using Maven) to the Jenkins UI.'
+echo 'Execute docker build'
 set -x
-java -jar target/${NAME}-${VERSION}.jar
+docker build -t rafael.altagnam/spring-security .
+set +x
+
+echo 'Execute docker run'
+set -x
+docker run -p 2000:8080 rafael.altagnam/spring-security .
+set +x
 
