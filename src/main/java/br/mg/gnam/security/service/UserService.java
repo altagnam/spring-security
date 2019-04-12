@@ -32,8 +32,8 @@ public class UserService {
 	/**
 	 * Bean responsável pela criptografia da senha
 	 */
-	@Autowired
-	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	//@Autowired
+	//private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	
 
@@ -55,7 +55,7 @@ public class UserService {
 		}
 		
 		user.setRole(ROLE_USER);
-		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+		//user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		return userRepository.save(user);
 	}
 	
