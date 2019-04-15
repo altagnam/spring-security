@@ -26,6 +26,6 @@ set +x
 
 echo 'Execute docker run'
 set -x
-docker run -p 2000:8080 rafael.altagnam/spring-security .
+docker run -p 2000:8080 rafael.altagnam/spring-security
 set +x
 
