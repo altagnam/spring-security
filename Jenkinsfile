@@ -34,7 +34,7 @@ pipeline {
         stage('Deliver') { 
         	agent any
             steps {
-                sh 'docker -v' 
+               sh './jenkins/deliver.sh' 
             }
         }
     }
